@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/y148"
-    android:background="#fbfbfb"
+    android:layout_height="@dimen/y128"
+    android:background="#FFFFFF"
     android:id="@+id/rl_base_head">
-
 
     <ImageView
         android:id="@+id/iv_base_leftimage"
@@ -13,7 +12,7 @@
         android:padding="@dimen/y20"
         android:layout_marginLeft="@dimen/x26"
         android:layout_centerVertical="true"
-        android:background="@drawable/bg_icon_press"
+        android:background="@drawable/bg_icon_press_oval"
         android:visibility="gone"/>
     <TextView
         android:id="@+id/tv_base_centerText"
@@ -52,6 +51,13 @@
         android:layout_marginRight="@dimen/x26"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/bg_icon_press"/>
+        android:background="@drawable/bg_icon_press_oval"/>
+
+    <!--中间为一条分割线-->
+    <View
+        android:background="#AAA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

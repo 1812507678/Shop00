@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -241,9 +242,13 @@ public class ApkUtil {
         SPUtil.putStringValueToSP("apk",apkString);
     }
 
-    public static Apk getApkFromSP() {
+    static Apk getApkFromSP() {
         Gson gson = new Gson();
-        return gson.fromJson("apk",Apk.class);
+        String apkString = SPUtil.getStringValueFromSP("apk");
+        if (!TextUtils.isEmpty(apkString)){
+            return gson.fromJson(apkString,Apk.class);
+        }
+        return null;
     }
 
 

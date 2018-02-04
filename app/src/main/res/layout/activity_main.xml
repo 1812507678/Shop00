@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
-    <!--使用FrameLayout当做盛放Fragment对象的容器-->
-    <FrameLayout
-        android:id="@+id/framelayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
-    <!--中间为一条分割线-->
-    <View
-        android:background="#AAA"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"/>
+
 
     <!--最下边为RadioGroup-->
     <RadioGroup
         android:id="@+id/radioGroup"
         android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/x10"
@@ -33,7 +21,7 @@
         <!--第一个RadioButton-->
         <RadioButton
             android:id="@+id/button_1"
-            android:text="button_1"
+            android:text="@string/home_button_value1"
             android:button="@null"
             android:background="@null"
             android:gravity="center"
@@ -46,7 +34,7 @@
         <!--第二个RadioButton-->
         <RadioButton
             android:id="@+id/button_2"
-            android:text="button_2"
+            android:text="@string/home_button_value2"
             android:button="@null"
             android:background="@null"
             android:gravity="center"
@@ -59,7 +47,7 @@
         <!--第三个RadioButton-->
         <RadioButton
             android:id="@+id/button_3"
-            android:text="button_3"
+            android:text="@string/home_button_value3"
             android:button="@null"
             android:background="@null"
             android:gravity="center"
@@ -72,16 +60,31 @@
         <!--第四个RadioButton-->
         <RadioButton
             android:id="@+id/button_4"
-            android:text="button_4"
-            android:button="@null"
-            android:background="@null"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/radiobutton_textbg"
-            android:drawableTop="@drawable/radiobutton_image4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:button="@null"
+            android:drawableTop="@drawable/radiobutton_image4"
+            android:gravity="center"
+            android:text="@string/home_button_value4"
+            android:textColor="@color/radiobutton_textbg"
+            android:textSize="14sp" />
 
     </RadioGroup>
-</LinearLayout>
+
+    <!--中间为一条分割线-->
+    <View
+        android:id="@+id/view_devi"
+        android:background="#AAA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:layout_above="@+id/radioGroup"/>
+    <!--使用FrameLayout当做盛放Fragment对象的容器-->
+    <RelativeLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_devi"/>
+
+</RelativeLayout>

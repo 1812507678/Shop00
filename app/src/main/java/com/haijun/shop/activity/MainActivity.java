@@ -14,39 +14,48 @@ import android.widget.RadioGroup;
 import com.haijun.shop.R;
 import com.haijun.shop.fragment.HomeFragment;
 import com.haijun.shop.fragment.MeFragment;
-import com.haijun.shop.fragment.MessageFragment;
-import com.haijun.shop.fragment.OrderFragment;
+import com.haijun.shop.fragment.WithDrawFragment;
+import com.haijun.shop.fragment.ShopCartFragment;
+import com.haijun.shop.util.ChooseAlertDialogUtil;
+import com.haijun.shop.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private RadioGroup radioGroup;
     private RadioButton button_1;
     private RadioButton button_2;
     private RadioButton button_3;
     private RadioButton button_4;
     private HomeFragment homeFragment;
-    private OrderFragment orderFragment;
-    private MessageFragment messageFragment;
+    private ShopCartFragment shopCartFragment;
+    private WithDrawFragment withDrawFragment;
     private MeFragment meFragment;
     private List<Fragment> list;
-    private FrameLayout frameLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //初始化页面
-        initView();
+        LogUtil.i(TAG,"onCreate");
     }
 
     //初始化页面
     @Override
     protected void initView() {
-        frameLayout = (FrameLayout) findViewById(R.id.framelayout);
+        setRightImage(R.drawable.qrscan);
+        getIv_base_rightimage().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChooseAlertDialogUtil chooseAlertDialogUtil = new ChooseAlertDialogUtil(MainActivity.this);
+                chooseAlertDialogUtil.setAlertDialogTextContact();
+            }
+        });
+
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         changeRadioGroupImageSize();
 
@@ -58,15 +67,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         //创建Fragment对象及集合
         homeFragment = new HomeFragment();
-        orderFragment = new OrderFragment();
-        messageFragment = new MessageFragment();
+        withDrawFragment = new WithDrawFragment();
+        shopCartFragment = new ShopCartFragment();
         meFragment = new MeFragment();
 
         //将Fragment对象添加到list中
         list = new ArrayList<>();
         list.add(homeFragment);
-        list.add(orderFragment);
-        list.add(messageFragment);
+        list.add(withDrawFragment);
+        list.add(shopCartFragment);
         list.add(meFragment);
 
         //设置RadioGroup开始时设置的按钮，设置第一个按钮为默认值
@@ -95,9 +104,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         int[] imgsID = new int[]{R.drawable.radiobutton_image1,R.drawable.radiobutton_image2,R.drawable.radiobutton_image3,R.drawable.radiobutton_image4};
         for(int i=0;i<4;i++){
             RadioButton rb=(RadioButton) radioGroup.getChildAt(i);
-            if(i==0){
-                rb.setChecked(true);
-            }
             int width = (int) getResources().getDimension(R.dimen.x80);
             Drawable d=getResources().getDrawable(imgsID[i]);
             d.setBounds(0, 0,width, width);
@@ -123,11 +129,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 setCenterText(button_1.getText().toString());
                 break;
             case R.id.button_2:
-                addFragment(orderFragment);
+                addFragment(withDrawFragment);
                 setCenterText(button_2.getText().toString());
                 break;
             case R.id.button_3:
-                addFragment(messageFragment);
+                addFragment(shopCartFragment);
                 setCenterText(button_3.getText().toString());
                 break;
             case R.id.button_4:
@@ -142,6 +148,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     //向Activity中添加Fragment的方法
     public void addFragment(Fragment fragment) {
+        LogUtil.i(TAG,"addFragment:"+fragment.getClass().getSimpleName());
         //获得Fragment管理器
         FragmentManager fragmentManager = getSupportFragmentManager();
         //使用管理器开启事务

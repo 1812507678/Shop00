@@ -1,13 +1,261 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.haijun.shop.fragment.HomeFragment">
+    tools:context="com.haijun.shop.fragment.HomeFragment"
+    android:background="@color/app_background_color">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="home" />
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_home_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x400"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="centerCrop"/>
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每日排行"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/layout_margin_leftright"
+                android:textColor="#3b3841"
+                android:textSize="@dimen/x40"/>
+            <RelativeLayout
+                android:id="@+id/rl_home_daily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:layout_marginRight="@dimen/layout_margin_leftright">
+                <ImageView
+                    android:id="@+id/iv_item_rticon1"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:src="@drawable/arrow_to_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/iv_item_rticon1"
+                    android:text="更多"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:textColor="#3b3841"
+                    android:textSize="@dimen/x35"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.haijun.shop.view.MultiLineGridView
+            android:id="@+id/mgv_home_daily"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机通讯"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/layout_margin_leftright"
+                android:textColor="#3b3841"
+                android:textSize="@dimen/x40"/>
+            <RelativeLayout
+                android:id="@+id/rl_home_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:layout_marginRight="@dimen/layout_margin_leftright">
+                <ImageView
+                    android:id="@+id/iv_item_rticon2"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:src="@drawable/arrow_to_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/iv_item_rticon2"
+                    android:text="更多"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:textColor="#3b3841"
+                    android:textSize="@dimen/x35"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.haijun.shop.view.MultiLineGridView
+            android:id="@+id/mgv_home_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2">
+        </com.haijun.shop.view.MultiLineGridView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电脑娱乐"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/layout_margin_leftright"
+                android:textColor="#3b3841"
+                android:textSize="@dimen/x40"/>
+            <RelativeLayout
+                android:id="@+id/rl_home_compute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:layout_marginRight="@dimen/layout_margin_leftright">
+                <ImageView
+                    android:id="@+id/iv_item_rticon3"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:src="@drawable/arrow_to_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/iv_item_rticon3"
+                    android:text="更多"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:textColor="#3b3841"
+                    android:textSize="@dimen/x35"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.haijun.shop.view.MultiLineGridView
+            android:id="@+id/mgv_home_computer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2">
+        </com.haijun.shop.view.MultiLineGridView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="摄影摄像"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/layout_margin_leftright"
+                android:textColor="#3b3841"
+                android:textSize="@dimen/x40"/>
+            <RelativeLayout
+                android:id="@+id/rl_home_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:layout_marginRight="@dimen/layout_margin_leftright">
+                <ImageView
+                    android:id="@+id/iv_item_rticon4"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:src="@drawable/arrow_to_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/iv_item_rticon4"
+                    android:text="更多"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:textColor="#3b3841"
+                    android:textSize="@dimen/x35"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.haijun.shop.view.MultiLineGridView
+            android:id="@+id/mgv_home_camera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2">
+        </com.haijun.shop.view.MultiLineGridView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="@dimen/x20"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="视听影音"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/layout_margin_leftright"
+                android:textColor="#3b3841"
+                android:textSize="@dimen/x40"/>
+            <RelativeLayout
+                android:id="@+id/rl_home_earphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:layout_marginRight="@dimen/layout_margin_leftright">
+                <ImageView
+                    android:id="@+id/iv_item_rticon5"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:src="@drawable/arrow_to_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/iv_item_rticon5"
+                    android:text="更多"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:textColor="#3b3841"
+                    android:textSize="@dimen/x35"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.haijun.shop.view.MultiLineGridView
+            android:id="@+id/mgv_home_earphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2">
+        </com.haijun.shop.view.MultiLineGridView>
+
+
+    </LinearLayout>
+
+</ScrollView>

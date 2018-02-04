@@ -1,6 +1,19 @@
 <resources>
-    <string name="app_name">Shop</string>
+    <string name="app_name">乐购物达瑞智</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <dimen name="layout_margin_leftright">@dimen/x36</dimen>
+
+    <string name="home_button_value1">首页</string>
+    <string name="home_button_value2">提现</string>
+    <string name="home_button_value3">购物车</string>
+    <string name="home_button_value4">我的</string>
+
+    <string name="yuan">¥</string>
+
+    <dimen name="space_13">13.0dip</dimen>
+    <dimen name="space_4">4.0dip</dimen>
+    <dimen name="text_size_16">16.0dip</dimen>
+    <dimen name="space_8">8.0dip</dimen>
 </resources>

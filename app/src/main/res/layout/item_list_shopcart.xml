@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x300"
+        android:layout_marginLeft="@dimen/layout_margin_leftright"
+        android:layout_marginRight="@dimen/layout_margin_leftright">
+        <CheckBox
+            android:id="@+id/rb_item_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:focusable="false"/>
+        <ImageView
+            android:id="@+id/iv_item_icon"
+            android:layout_width="@dimen/x250"
+            android:layout_height="@dimen/x250"
+            android:layout_toRightOf="@+id/rb_item_select"
+            android:src="@drawable/logo"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x25"/>
+        <TextView
+            android:id="@+id/tv_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="题目"
+            android:layout_marginLeft="@dimen/x36"
+            android:layout_marginTop="@dimen/x20"
+            android:textSize="@dimen/x36"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/iv_item_icon"/>
+        <TextView
+            android:id="@+id/tv_item_format"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="规格"
+            android:layout_marginLeft="@dimen/x36"
+            android:textSize="@dimen/x32"
+            android:textColor="#999"
+            android:layout_toRightOf="@+id/iv_item_icon"
+            android:layout_below="@+id/tv_item_title"/>
+        <TextView
+            android:id="@+id/tv_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2000"
+            android:layout_marginLeft="@dimen/x36"
+            android:textSize="@dimen/x32"
+            android:textColor="#EE0000"
+            android:layout_toRightOf="@+id/iv_item_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x20"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

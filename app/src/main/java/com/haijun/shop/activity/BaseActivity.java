@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.haijun.shop.R;
+import com.haijun.shop.util.StatusBarUtil;
+import com.umeng.analytics.MobclickAgent;
 
 
 public abstract class BaseActivity extends FragmentActivity {
@@ -43,10 +45,14 @@ public abstract class BaseActivity extends FragmentActivity {
      * 初始化contentview
      */
     private void initContentView(int layoutResID) {
+        StatusBarUtil.StatusBarLightMode(this);
+
         ViewGroup viewGroup = (ViewGroup) findViewById(android.R.id.content);
         viewGroup.removeAllViews();
         parentLinearLayout = new LinearLayout(this);
         parentLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        parentLinearLayout.setClickable(true);
+        parentLinearLayout.setFitsSystemWindows(true);
         viewGroup.addView(parentLinearLayout);
         View actionbarLayout = LayoutInflater.from(this).inflate(layoutResID, parentLinearLayout, true);
 
@@ -64,6 +70,17 @@ public abstract class BaseActivity extends FragmentActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     //布局初始化
     protected abstract void initView();

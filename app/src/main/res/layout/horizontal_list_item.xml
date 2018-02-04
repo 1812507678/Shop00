@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/app_background_color">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x600"
+        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/x20"
+        android:background="@drawable/bg_bt_rec_roundangle_white">
+
+        <ImageView
+            android:id="@+id/iv_goods_image"
+            android:layout_width="@dimen/x300"
+            android:layout_height="@dimen/x400"
+            android:src="@drawable/logo"
+            android:layout_marginTop="@dimen/x20"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/iv_goods_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="name"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/iv_goods_image"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
+            android:lines="1"
+            android:ellipsize="end"/>
+        <RelativeLayout
+            android:layout_width="@dimen/x450"
+            android:layout_height="@dimen/x80"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x20"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_bt_rec_roundangle"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/iv_goods_curprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="999"
+                android:textColor="#FFF"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/iv_goods_oldprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:textColor="#FFF"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/iv_goods_curprice"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_alignBottom="@+id/iv_goods_curprice"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

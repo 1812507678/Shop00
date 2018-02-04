@@ -1,5 +1,7 @@
 package com.haijun.shop.bean;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * @anthor haijun
  * @project name: Shop
@@ -7,5 +9,6 @@ package com.haijun.shop.bean;
  * @time 2018-02-02 11:28 AM
  * @describe
  */
-public class User {
+public class User extends BmobObject{
+
 }

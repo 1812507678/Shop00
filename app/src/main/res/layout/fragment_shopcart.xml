@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.haijun.shop.fragment.ShopCartFragment"
+    android:background="@color/app_background_color">
+
+    <ListView
+        android:id="@+id/lv_shopcart_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:layout_marginTop="@dimen/x20">
+    </ListView>
+
+    <RelativeLayout
+        android:id="@+id/rl_detail_bootom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x130"
+        android:layout_alignParentBottom="true"
+        android:background="#fff">
+        <TextView
+            android:id="@+id/tv_shopcart_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="合计:00"
+            android:gravity="center"
+            android:textSize="@dimen/x48"
+            android:textColor="#ee0000"
+            android:layout_marginLeft="@dimen/x36"/>
+
+        <TextView
+            android:id="@+id/tv_shopcart_pay"
+            android:layout_width="@dimen/x350"
+            android:layout_height="match_parent"
+            android:text="去结算"
+            android:gravity="center"
+            android:textSize="@dimen/x40"
+            android:textColor="#FFF"
+            android:clickable="true"
+            android:background="@drawable/bg_rec_good_buy"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <!--中间为一条分割线-->
+    <View
+        android:background="#AAA"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:layout_above="@+id/rl_detail_bootom"/>
+
+</RelativeLayout>

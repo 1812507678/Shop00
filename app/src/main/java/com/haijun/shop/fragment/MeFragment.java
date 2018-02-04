@@ -16,6 +16,8 @@ import com.haijun.shop.util.LogUtil;
 public class MeFragment extends Fragment {
 
 
+    private View inflate;
+
     public MeFragment() {
         // Required empty public constructor
     }
@@ -24,9 +26,21 @@ public class MeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        LogUtil.i("MeFragment","onCreateView");
-        return inflater.inflate(R.layout.fragment_me, container, false);
+        if (null != inflate) {
+            ViewGroup parent = (ViewGroup) inflate.getParent();
+            if (null != parent) {
+                parent.removeView(inflate);
+            }
+        } else {
+            inflate = inflater.inflate(R.layout.fragment_me, container, false);
+            LogUtil.i("MeFragment","onCreateView");
+            initView();// 控件初始化
+        }
+        return inflate;
+    }
+
+    private void initView() {
+
     }
 
 }

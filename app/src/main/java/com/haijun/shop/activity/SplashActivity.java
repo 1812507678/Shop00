@@ -2,6 +2,7 @@ package com.haijun.shop.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.haijun.shop.R;
 import com.haijun.shop.util.ConfigUtil;
@@ -39,5 +40,6 @@ public class SplashActivity extends BaseActivity {
     protected void initData() {
 
     }
+
 
 }
