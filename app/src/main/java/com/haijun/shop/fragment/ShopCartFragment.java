@@ -17,10 +17,16 @@ import com.haijun.shop.activity.GoodsDetailActivity;
 import com.haijun.shop.adapter.ShopcartListAdapter;
 import com.haijun.shop.bean.Goods;
 import com.haijun.shop.util.LogUtil;
+import com.haijun.shop.util.ShopCartUtil;
 import com.haijun.shop.util.ShowToaskDialogUtil;
 import com.haijun.shop.util.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,11 +34,14 @@ import java.util.ArrayList;
 public class ShopCartFragment extends Fragment implements View.OnClickListener{
 
 
+    private static final String TAG = ShopCartFragment.class.getSimpleName();
     private View inflate;
     private ListView lv_shopcart_list;
     private TextView tv_shopcart_money;
 
     private float allMoney;
+    private List<Goods> mGoodsArrayList;
+    private ShopcartListAdapter mShopcartListAdapter;
 
     public ShopCartFragment() {
         // Required empty public constructor
@@ -66,10 +75,10 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData() {
-        final ArrayList<Goods> goodsArrayList = new ArrayList<>();
+        mGoodsArrayList = new ArrayList<>();
 
-        ShopcartListAdapter adapter = new ShopcartListAdapter(getContext(), goodsArrayList);
-        lv_shopcart_list.setAdapter(adapter);
+        mShopcartListAdapter = new ShopcartListAdapter(getContext(), mGoodsArrayList);
+        lv_shopcart_list.setAdapter(mShopcartListAdapter);
 
         lv_shopcart_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,7 +100,7 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-       adapter.setOnListViewRadioButtonSelected(new ShopcartListAdapter.OnListViewRadioCheckedChangeListener() {
+        mShopcartListAdapter.setOnListViewRadioButtonSelected(new ShopcartListAdapter.OnListViewRadioCheckedChangeListener() {
            @Override
            public void onChecked(float price, boolean checked) {
                if (checked){
@@ -104,6 +113,18 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
                tv_shopcart_money.setText("总计："+(int)allMoney);
            }
        });
+
+        BmobQuery<Goods> bmobQuery = new BmobQuery<>();
+        bmobQuery.findObjects(new FindListener<Goods>() {
+            @Override
+            public void done(List<Goods> list, BmobException e) {
+                if (e==null){
+                    mGoodsArrayList.addAll(list);
+                    mShopcartListAdapter.notifyDataSetChanged();
+                    ShopCartUtil.getInstance().setGoodsShopCartList(list);
+                }
+            }
+        });
     }
 
     @Override
@@ -115,5 +136,15 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtil.i(TAG,"onResume");
+        List<Goods> goodsShopCartList = ShopCartUtil.getInstance().getGoodsShopCartList();
+        if (goodsShopCartList!=null && goodsShopCartList.size()>mGoodsArrayList.size()){
+            mGoodsArrayList.clear();
+            mGoodsArrayList.addAll(goodsShopCartList);
+            mShopcartListAdapter.notifyDataSetChanged();
+        }
+    }
 }

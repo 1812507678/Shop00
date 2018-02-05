@@ -33,7 +33,7 @@
         <meta-data android:value="5a76a266a40fa3304a00027b" android:name="UMENG_APPKEY"/>
         <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
 
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,9 +46,16 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.SplashActivity" />
-        <activity android:name=".activity.GoodsListActivity" />
-        <activity android:name=".activity.GoodsDetailActivity"></activity>
+        <activity android:name=".activity.SplashActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GoodsListActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GoodsDetailActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.AccountnfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ComplaintFeedbackActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ModifyAccountItemActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.RetrievePasswordActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.SettingActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

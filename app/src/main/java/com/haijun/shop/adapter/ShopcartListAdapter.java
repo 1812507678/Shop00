@@ -67,7 +67,7 @@ public class ShopcartListAdapter extends BaseAdapter {
         final Goods goods = getItem(i);
         mImageManager.bind(holder.iv_item_icon,goods.getLogoUrl());
         holder.tv_item_title.setText(goods.getName());
-        holder.tv_item_format.setText("规格：fffsssdsdsdsdsdsdsdsdsds"+(int)goods.getCurPrice());
+        holder.tv_item_format.setText("规格:"+goods.getSpecification());
         holder.tv_item_price.setText("¥"+(int)goods.getCurPrice());
 
         holder.rb_item_select.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

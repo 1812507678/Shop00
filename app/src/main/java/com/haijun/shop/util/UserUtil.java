@@ -1,5 +1,7 @@
 package com.haijun.shop.util;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.haijun.shop.bean.User;
 
@@ -22,7 +24,11 @@ public class UserUtil {
 
     public static User getUserFromSP(){
         Gson gson = new Gson();
-        return gson.fromJson("user",User.class);
+        String userString = SPUtil.getStringValueFromSP("user");
+        if (!TextUtils.isEmpty(userString)){
+            return gson.fromJson(userString,User.class);
+        }
+        return null;
     }
 
     public static void putUserToSP(User user){

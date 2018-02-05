@@ -51,7 +51,8 @@
         android:layout_marginRight="@dimen/x26"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/bg_icon_press_oval"/>
+        android:background="@drawable/bg_icon_press_oval"
+        android:visibility="gone"/>
 
     <!--中间为一条分割线-->
     <View

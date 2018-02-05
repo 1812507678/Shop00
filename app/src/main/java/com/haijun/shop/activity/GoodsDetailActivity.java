@@ -1,10 +1,8 @@
 package com.haijun.shop.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +21,6 @@ import com.haijun.shop.util.UserUtil;
 
 import org.xutils.ImageManager;
 import org.xutils.x;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -66,6 +61,9 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         tv_detail_oldpirce = findViewById(R.id.tv_detail_oldpirce);
 
         ll_detail_point = findViewById(R.id.ll_detail_point);
+
+        tv_goodsdetail_buy.setOnClickListener(this);
+        tv_goodsdetail_add.setOnClickListener(this);
 
     }
 
@@ -155,16 +153,21 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     private void addToShopCart() {
         if (mGoods!=null){
             User userFromSP = UserUtil.getUserInfo();
-            final ShopCart shopCart = new ShopCart(userFromSP.getObjectId(),mGoods.getName(),mGoods.getLogoUrl(),mGoods.getSpecification(),mGoods.getCurPrice());
-            shopCart.save(new SaveListener<String>() {
-                @Override
-                public void done(String s, BmobException e) {
-                    if (e==null){
-                        ShopCartUtil.getInstance().addGoodsShopCartList(shopCart);
-                        ToastUtil.showToask("加入购物车成功");
+            if (userFromSP!=null){
+                final ShopCart shopCart = new ShopCart(userFromSP.getObjectId(),mGoods.getObjectId());
+                shopCart.save(new SaveListener<String>() {
+                    @Override
+                    public void done(String s, BmobException e) {
+                        if (e==null){
+                            ShopCartUtil.getInstance().addGoodsShopCartList(mGoods);
+                            ToastUtil.showToask("加入购物车成功");
+                        }
+                        else {
+                            ToastUtil.showToask("加入购物车失败："+e);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }
 

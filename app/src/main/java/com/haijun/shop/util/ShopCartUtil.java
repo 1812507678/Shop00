@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class ShopCartUtil {
-    private List<ShopCart> goodsShopCartList = new ArrayList<>();
+    private List<Goods> goodsShopCartList = new ArrayList<>();
     private static ShopCartUtil shopCartUtil;
 
     public static ShopCartUtil getInstance(){
@@ -25,15 +25,15 @@ public class ShopCartUtil {
         return shopCartUtil;
     }
 
-    public List<ShopCart> getGoodsShopCartList() {
+    public List<Goods> getGoodsShopCartList() {
         return goodsShopCartList;
     }
 
-    public void setGoodsShopCartList(List<ShopCart> goodsShopCartList) {
+    public void setGoodsShopCartList(List<Goods> goodsShopCartList) {
         this.goodsShopCartList = goodsShopCartList;
     }
 
-    public void addGoodsShopCartList(ShopCart shopCart){
+    public void addGoodsShopCartList(Goods shopCart){
         if (goodsShopCartList!=null){
             goodsShopCartList.add(shopCart);
         }

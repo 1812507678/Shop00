@@ -9,10 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.HeaderViewListAdapter;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -20,13 +17,10 @@ import com.haijun.shop.R;
 import com.haijun.shop.activity.GoodsDetailActivity;
 import com.haijun.shop.activity.GoodsListActivity;
 import com.haijun.shop.adapter.HorizontalListViewAdapter;
-import com.haijun.shop.bean.Apk;
 import com.haijun.shop.bean.Goods;
 import com.haijun.shop.bean.ProductCategory;
-import com.haijun.shop.bean.ShopCart;
 import com.haijun.shop.util.LogUtil;
 import com.haijun.shop.util.ToastUtil;
-import com.haijun.shop.view.HorizontalListView;
 
 import org.xutils.x;
 
@@ -34,9 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -289,6 +284,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         */
 
+        //SELECT * FROM Goods LEFT JOIN ShopCart ON Goods.objectId = ShopCart.goodsId
+        String bql ="select * from Goods where objectId in (select goodsId from ShopCart where userId = '111111')";
+
+        new BmobQuery<Goods>().doSQLQuery(bql,new SQLQueryListener<Goods>(){
+            @Override
+            public void done(BmobQueryResult<Goods> result, BmobException e) {
+                if(e ==null){
+                    LogUtil.i(TAG, "result:"+result.getResults().size());
+                    LogUtil.i(TAG, "result:"+result.getResults());
+                }else{
+                    LogUtil.i(TAG, "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+                }
+            }
+        });
+
+
     }
 
     private void initData() {
@@ -297,7 +308,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         bmobQuery.findObjects(new FindListener<ProductCategory>() {
             @Override
             public void done(List<ProductCategory> list, BmobException e) {
-                classifyGoods(list);
+                if (e==null){
+                    classifyGoods(list);
+                }
+                else {
+                    ToastUtil.showToask("数据加载失败，请检查网络:"+e);
+                }
             }
         });
     }

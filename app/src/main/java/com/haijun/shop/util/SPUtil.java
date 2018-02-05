@@ -95,4 +95,9 @@ public class SPUtil {
         editor.apply();
     }
 
+    //清楚SP里的所有数据
+    public static void clearAllSPData(){
+        mPreferences.edit().clear().apply();
+    }
+
 }
