@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.haijun.shop.R;
@@ -52,6 +55,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private GridView mgv_home_camera;
     private GridView mgv_home_earphone;
     private ImageView iv_home_top;
+    private ProgressBar pb_progress;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -89,6 +94,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         mgv_home_camera = inflate.findViewById(R.id.mgv_home_camera);
         mgv_home_earphone = inflate.findViewById(R.id.mgv_home_earphone);
 
+        //pb_progress = inflate.findViewById(R.id.pb_progress);
+
         RelativeLayout rl_home_daily = inflate.findViewById(R.id.rl_home_daily);
         RelativeLayout rl_home_phone = inflate.findViewById(R.id.rl_home_phone);
         RelativeLayout rl_home_compute = inflate.findViewById(R.id.rl_home_compute);
@@ -110,9 +117,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
         });
 
+        swipeRefreshLayout = (SwipeRefreshLayout) inflate.findViewById(R.id.sr1);
+        swipeRefreshLayout.setColorSchemeResources(R.color.my_information_option_pressed,R.color.my_information_option_pressed);
+        swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayoutListener());
 
-
-
+        swipeRefreshLayout.setRefreshing(true);
 
 
         /*goods.setCategoryType(ProductCategory.ProductCategoryType.ProductCategory_Camera);
@@ -285,25 +294,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         */
 
         //SELECT * FROM Goods LEFT JOIN ShopCart ON Goods.objectId = ShopCart.goodsId
-        String bql ="select * from Goods where objectId in (select goodsId from ShopCart where userId = '111111')";
 
-        new BmobQuery<Goods>().doSQLQuery(bql,new SQLQueryListener<Goods>(){
-            @Override
-            public void done(BmobQueryResult<Goods> result, BmobException e) {
-                if(e ==null){
-                    LogUtil.i(TAG, "result:"+result.getResults().size());
-                    LogUtil.i(TAG, "result:"+result.getResults());
-                }else{
-                    LogUtil.i(TAG, "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
-                }
-            }
-        });
 
 
     }
 
     private void initData() {
-        BmobQuery<ProductCategory> bmobQuery = new BmobQuery<>();
+        /*BmobQuery<ProductCategory> bmobQuery = new BmobQuery<>();
         bmobQuery.setLimit(5);
         bmobQuery.findObjects(new FindListener<ProductCategory>() {
             @Override
@@ -315,28 +312,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     ToastUtil.showToask("数据加载失败，请检查网络:"+e);
                 }
             }
+        });*/
+        BmobQuery<Goods> bmobQuery = new BmobQuery<>();
+        bmobQuery.findObjects(new FindListener<Goods>() {
+            @Override
+            public void done(List<Goods> list, BmobException e) {
+                swipeRefreshLayout.setRefreshing(false);
+                if (e==null){
+                    classifyGoods(list);
+                }
+                else {
+                    ToastUtil.showToask("数据加载失败，请检查网络:"+e);
+                }
+            }
         });
     }
 
 
-    private void classifyGoods(List<ProductCategory> list) {
-        for (ProductCategory productCategory:list){
-            List<Goods> goodsList = productCategory.getGoodsList();
-            switch (productCategory.getProductCategoryType()){
+    private void classifyGoods(List<Goods> list) {
+        for (Goods goods:list){
+            switch (goods.getCategoryType()){
                 case ProductCategory_Daily:
-                    dailyGoodsArrayList.addAll(goodsList);
+                    dailyGoodsArrayList.add(goods);
                     break;
                 case ProductCategory_Phone:
-                    phoneGoodsArrayList.addAll(goodsList);
+                    phoneGoodsArrayList.add(goods);
                     break;
                 case ProductCategory_Computer:
-                    computerGoodsArrayList.addAll(goodsList);
+                    computerGoodsArrayList.add(goods);
                     break;
                 case ProductCategory_Camera:
-                    cameraGoodsArrayList.addAll(goodsList);
+                    cameraGoodsArrayList.add(goods);
                     break;
                 case ProductCategory_Earphone:
-                    earphoneGoodsArrayList.addAll(goodsList);
+                    earphoneGoodsArrayList.add(goods);
                     break;
             }
         }
@@ -353,7 +362,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         mgv_home_camera.setOnItemClickListener(new MyOnItemClickListener(cameraGoodsArrayList));
         mgv_home_earphone.setOnItemClickListener(new MyOnItemClickListener(earphoneGoodsArrayList));
 
-        final Goods goods = dailyGoodsArrayList.get(2);
+        final Goods goods = dailyGoodsArrayList.get(0);
         x.image().bind(iv_home_top, goods.getLogoUrl());
         iv_home_top.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -411,6 +420,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             bundle.putParcelable("goods",goods);
             intent.putExtra("bundle",bundle);
             startActivity(intent);
+        }
+    }
+
+    private class MySwipeRefreshLayoutListener implements SwipeRefreshLayout.OnRefreshListener{
+        @Override
+        public void onRefresh() {
+            Log.i(TAG,"onRefresh");
+            initData();
         }
     }
 }

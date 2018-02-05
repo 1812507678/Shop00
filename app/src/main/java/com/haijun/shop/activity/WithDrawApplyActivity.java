@@ -1,13 +1,8 @@
-package com.haijun.shop.fragment;
+package com.haijun.shop.activity;
 
-
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -15,18 +10,14 @@ import com.haijun.shop.R;
 import com.haijun.shop.bean.ApplyInfo;
 import com.haijun.shop.util.Constant;
 import com.haijun.shop.util.DialogUtil;
-import com.haijun.shop.util.LogUtil;
 import com.haijun.shop.util.SPUtil;
 import com.haijun.shop.util.ToastUtil;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class WithDrawFragment extends Fragment implements View.OnClickListener{
-    private static final String TAG = "WithDrawFragment";
+public class WithDrawApplyActivity extends BaseActivity implements View.OnClickListener{
+    private static final String TAG = "WithDrawApplyActivity";
     private EditText et_commit_money;
     private EditText et_commit_mouth;
     private EditText et_commit_name;
@@ -36,52 +27,33 @@ public class WithDrawFragment extends Fragment implements View.OnClickListener{
     private EditText et_commit_acount;
     private EditText et_commit_password;
 
-    private View inflate;
-    private View ll_applytext;
-    private View tv_showtext;
-
-    public WithDrawFragment() {
-        // Required empty public constructor
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_with_draw);
     }
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        if (null != inflate) {
-            ViewGroup parent = (ViewGroup) inflate.getParent();
-            if (null != parent) {
-                parent.removeView(inflate);
-            }
-        } else {
-            inflate = inflater.inflate(R.layout.fragment_withdraw, container, false);
-            LogUtil.i("WithDrawFragment","onCreateView");
-            initView();// 控件初始化
-        }
-        return inflate;
+    protected void initView() {
+        setCenterText("额度申请");
+        setLeftImage(R.drawable.back_normal);
+
+        et_commit_money = (EditText) findViewById(R.id.et_commit_money);
+        et_commit_name = (EditText) findViewById(R.id.et_commit_name);
+        et_commit_mouth = (EditText) findViewById(R.id.et_commit_mouth);
+        et_commit_phone = (EditText) findViewById(R.id.et_commit_phone);
+        et_commit_qq = (EditText) findViewById(R.id.et_commit_qq);
+        et_commit_certif = (EditText) findViewById(R.id.et_commit_certif);
+        et_commit_acount = (EditText) findViewById(R.id.et_commit_acount);
+        et_commit_password = (EditText) findViewById(R.id.et_commit_password);
+
+        Button bt_withdraw_submit = findViewById(R.id.bt_withdraw_submit);
+        bt_withdraw_submit.setOnClickListener(this);
     }
 
-    private void initView() {
-        et_commit_money = (EditText) inflate.findViewById(R.id.et_commit_money);
-        et_commit_name = (EditText) inflate.findViewById(R.id.et_commit_name);
-        et_commit_mouth = (EditText) inflate.findViewById(R.id.et_commit_mouth);
-        et_commit_phone = (EditText) inflate.findViewById(R.id.et_commit_phone);
-        et_commit_qq = (EditText) inflate.findViewById(R.id.et_commit_qq);
-        et_commit_certif = (EditText) inflate.findViewById(R.id.et_commit_certif);
-        et_commit_acount = (EditText) inflate.findViewById(R.id.et_commit_acount);
-        et_commit_password = (EditText) inflate.findViewById(R.id.et_commit_password);
+    @Override
+    protected void initData() {
 
-        Button bt_withdraw_submit = inflate.findViewById(R.id.bt_withdraw_submit);
-        bt_withdraw_submit.setOnClickListener(this);
-
-        ll_applytext = inflate.findViewById(R.id.ll_applytext);
-        tv_showtext = inflate.findViewById(R.id.tv_showtext);
-
-        boolean booleanValueFromSP = SPUtil.getBooleanValueFromSP(Constant.isApplyWithDraw);
-        if (booleanValueFromSP){
-            ll_applytext.setVisibility(View.GONE);
-            tv_showtext.setVisibility(View.VISIBLE);
-        }
     }
 
     public void commitInfo(){
@@ -138,19 +110,18 @@ public class WithDrawFragment extends Fragment implements View.OnClickListener{
     }
 
     private void uploadData(ApplyInfo applyInfo) {
-        DialogUtil.showDialog("正在提交",getActivity());
+        DialogUtil.showDialog("正在提交",this);
         applyInfo.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
                 if (e==null){
-                    DialogUtil.hideDialog(getActivity());
+                    DialogUtil.hideDialog(WithDrawApplyActivity.this);
                     ToastUtil.showToask("申请成功");
                     SPUtil.putBooleanValueToSP(Constant.isApplyWithDraw,true);
-                    ll_applytext.setVisibility(View.GONE);
-                    tv_showtext.setVisibility(View.VISIBLE);
+                    finish();
                 }
                 else {
-                    DialogUtil.hideDialog(getActivity());
+                    DialogUtil.hideDialog(WithDrawApplyActivity.this);
                     ToastUtil.showToask("申请失败"+s);
                 }
             }

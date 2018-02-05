@@ -42,6 +42,8 @@ public class AccountnfoActivity extends BaseActivity {
 
 	protected void initView() {
 		setCenterText("个人信息");
+		setLeftImage(R.drawable.back_normal);
+
 		RelativeLayout rl_personcenter_persondata = (RelativeLayout) findViewById(R.id.rl_personcenter_persondata);
 		tv_personcenter_nickname = (TextView) findViewById(R.id.tv_personcenter_nickname);
 		iv_personcenter_iocn = (CircleImageView) findViewById(R.id.iv_personcenter_iocn);
@@ -96,6 +98,7 @@ public class AccountnfoActivity extends BaseActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.i(TAG, "requestCode:" + requestCode);
 		if (resultCode==RESULT_OK){
 			String result = data.getStringExtra("result");
 			if (requestCode==110){
@@ -117,6 +120,7 @@ public class AccountnfoActivity extends BaseActivity {
 					icon.upload(new UploadFileListener() {
 						@Override
 						public void done(BmobException e) {
+							Log.i(TAG,"上传:   "+e);
 							if (e==null){
 								final User user = UserUtil.getUserInfo();
 								if (user!=null){

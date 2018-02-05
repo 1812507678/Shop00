@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.haijun.shop.R;
 import com.haijun.shop.util.ApkUtil;
 import com.haijun.shop.util.SPUtil;
+import com.haijun.shop.util.UserUtil;
 
 import java.io.File;
 
@@ -31,6 +32,8 @@ public class SettingActivity extends BaseActivity {
 
 	protected void initView() {
 		setCenterText("系统设置");
+		setLeftImage(R.drawable.back_normal);
+
 		RelativeLayout ll_me_password = (RelativeLayout) findViewById(R.id.ll_me_password);
 		RelativeLayout ll_me_suggest = (RelativeLayout) findViewById(R.id.ll_me_suggest);
 		RelativeLayout ll_me_update = (RelativeLayout) findViewById(R.id.ll_me_update);
@@ -79,6 +82,7 @@ public class SettingActivity extends BaseActivity {
 				case R.id.ll_me_exit:
 					startActivity(new Intent(SettingActivity.this,LoginActivity.class));
 					SPUtil.clearAllSPData();
+					UserUtil.putUserToSP(null);
 					finish();
 					break;
 			}

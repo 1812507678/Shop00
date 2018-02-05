@@ -32,6 +32,8 @@ public class RetrievePasswordActivity extends BaseActivity {
 
     protected void initView() {
         setCenterText("找回密码");
+        setLeftImage(R.drawable.back_normal);
+
         tv_retrive_phone = (EditText) findViewById(R.id.tv_retrive_phone);
         et_retrive_password = (TextView) findViewById(R.id.et_retrive_password);
     }
@@ -66,6 +68,7 @@ public class RetrievePasswordActivity extends BaseActivity {
                         Log.i(TAG,"userInfo:"+userInfo.toString());
                         et_retrive_password.setText(userInfo.getPassword());
                         UserUtil.putUserToSP(userInfo);
+                        ToastUtil.showToask("密码已显示，请登陆");
                     }
                     else {
                         et_retrive_password.setText("用户不存在或输入号码错误");

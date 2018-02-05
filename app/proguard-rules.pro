@@ -79,5 +79,10 @@
 -keep class org.apache.http.**{*;}
 
 
-#友盟
+#=====================友盟混淆=====================
 -keep class com.umeng.commonsdk.** {*;}
+
+
+#=====================腾讯bugly混淆=====================
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.haijun.shop.R;
 import com.haijun.shop.bean.User;
 import com.haijun.shop.util.DialogUtil;
+import com.haijun.shop.util.ToastUtil;
 import com.haijun.shop.util.UserUtil;
 
 import java.util.List;
@@ -85,9 +86,13 @@ public class LoginActivity extends BaseActivity {
                         User user = list.get(0);
                         if (!user.getPassword().equals(password)){
                             Toast.makeText(LoginActivity.this,"密码不正确",Toast.LENGTH_SHORT).show();
-                            return;
                         }
-                        UserUtil.putUserToSP(user);
+                        else {
+                            UserUtil.putUserToSP(user);
+                            ToastUtil.showToask("登陆成功");
+                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            finish();
+                        }
                     }
                 }
                 else if (e.getErrorCode()==101){

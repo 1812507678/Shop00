@@ -28,6 +28,7 @@ public class ComplaintFeedbackActivity extends BaseActivity {
 
 	@Override
 	protected void initView() {
+		setLeftImage(R.drawable.back_normal);
 		setCenterText("用户反馈");
 	}
 

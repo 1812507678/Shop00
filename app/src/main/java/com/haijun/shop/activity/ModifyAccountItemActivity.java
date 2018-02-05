@@ -28,6 +28,16 @@ public class ModifyAccountItemActivity extends BaseActivity {
 
     protected void initView() {
         setCenterText("修改信息");
+        setLeftImage(R.drawable.back_normal);
+        setRightText("确定");
+
+        getTv_base_rightText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                modify();
+            }
+        });
+
         ed_modifyuser_vlaue = (EditText) findViewById(R.id.ed_modifyuser_vlaue);
 
         User userInfo = UserUtil.getUserInfo();
@@ -47,7 +57,7 @@ public class ModifyAccountItemActivity extends BaseActivity {
 
     }
 
-    public void modify(View view){
+    public void modify(){
         final String value = ed_modifyuser_vlaue.getText().toString();
         if (initValue.equals(value)) {
             finish();

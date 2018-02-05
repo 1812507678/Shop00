@@ -124,7 +124,7 @@
             android:textSize="@dimen/x40"
             android:textColor="#FFF"
             android:clickable="true"
-            android:layout_toLeftOf="@+id/tv_goodsdetail_buy"
+            android:layout_toLeftOf="@id/tv_goodsdetail_buy"
             android:background="@drawable/bg_rec_good_add"
             android:gravity="center"
             android:text="加入购物车"/>

@@ -86,7 +86,7 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
 	@Override
 	public void setScaleType(ScaleType scaleType) {
 		if (scaleType != SCALE_TYPE) {
-			throw new IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType));
+			//throw new IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType));
 		}
 	}
 

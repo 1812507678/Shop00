@@ -15,7 +15,7 @@
         android:paddingLeft="5dp">
         <TextView
             style="@style/option_item_text"
-            android:text="修改密码"/>
+            android:text="找回密码"/>
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"

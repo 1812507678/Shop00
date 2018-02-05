@@ -38,6 +38,7 @@ public class RegisterActivity extends BaseActivity {
 
     protected void initView() {
         setCenterText("注册");
+        setLeftImage(R.drawable.back_normal);
         et_register_phone = (EditText) findViewById(R.id.et_register_phone);
         et_register_password = (EditText) findViewById(R.id.et_register_password);
         et_register_repassword = (EditText) findViewById(R.id.et_register_repassword);
@@ -81,8 +82,9 @@ public class RegisterActivity extends BaseActivity {
                     UserUtil.putUserToSP(user);
                     ToastUtil.showToask("注册成功");
                     startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                    finish();
                 }
-                else if (e.getErrorCode()==111){
+                else if (e.getErrorCode()==401){
                     ToastUtil.showToask("该用户已注册，请登录");
                 }
                 else {

@@ -134,6 +134,7 @@ public class Goods extends BmobObject implements Parcelable{
         parcel.writeList(photoImageUrlList);
         parcel.writeList(intrImageUrlList);
         parcel.writeInt(categoryType.ordinal());
+        parcel.writeString(getObjectId());
     }
 
     public static final Creator<Goods> CREATOR = new Creator<Goods>() {
@@ -162,5 +163,7 @@ public class Goods extends BmobObject implements Parcelable{
         source.readList(this.intrImageUrlList,null);
 
         this.categoryType = ProductCategory.ProductCategoryType.values()[source.readInt()];
+
+        this.setObjectId(source.readString());
     }
 }

@@ -1,5 +1,6 @@
 package com.haijun.shop.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -15,7 +16,13 @@ import com.haijun.shop.adapter.ImagesViewPageAdapter;
 import com.haijun.shop.bean.Goods;
 import com.haijun.shop.bean.ShopCart;
 import com.haijun.shop.bean.User;
+import com.haijun.shop.util.ChooseAlertDialogUtil;
+import com.haijun.shop.util.Constant;
+import com.haijun.shop.util.DialogUtil;
+import com.haijun.shop.util.LogUtil;
+import com.haijun.shop.util.SPUtil;
 import com.haijun.shop.util.ShopCartUtil;
+import com.haijun.shop.util.ShowToaskDialogUtil;
 import com.haijun.shop.util.ToastUtil;
 import com.haijun.shop.util.UserUtil;
 
@@ -27,6 +34,7 @@ import cn.bmob.v3.listener.SaveListener;
 
 public class GoodsDetailActivity extends BaseActivity implements View.OnClickListener{
 
+    private static final String TAG = GoodsDetailActivity.class.getSimpleName();
     private ViewPager vp_goodsdetail_images;
     private int mPreviousSelectedPosition = 0;
     private TextView tv_detail_title;
@@ -155,12 +163,17 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
             User userFromSP = UserUtil.getUserInfo();
             if (userFromSP!=null){
                 final ShopCart shopCart = new ShopCart(userFromSP.getObjectId(),mGoods.getObjectId());
+                LogUtil.i(TAG,"shopCart:"+shopCart);
                 shopCart.save(new SaveListener<String>() {
                     @Override
                     public void done(String s, BmobException e) {
+                        LogUtil.i(TAG,"s:"+s+"    e:"+e);
                         if (e==null){
                             ShopCartUtil.getInstance().addGoodsShopCartList(mGoods);
                             ToastUtil.showToask("加入购物车成功");
+                        }
+                        else if (e.getErrorCode()==401){
+                            ToastUtil.showToask("该商品已经加入购物车，无需重复添加");
                         }
                         else {
                             ToastUtil.showToask("加入购物车失败："+e);
@@ -168,10 +181,26 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                     }
                 });
             }
+            else {
+                ToastUtil.showToask("未登陆，请先登陆");
+                startActivity(new Intent(this,LoginActivity.class));
+            }
         }
     }
 
     private void buyNow() {
-
+        boolean booleanValueFromSP = SPUtil.getBooleanValueFromSP(Constant.isApplyWithDraw);
+        if (booleanValueFromSP){
+            ToastUtil.showToask("您已经申请额度，正在审核，审核通过后就可以购物了");
+        }
+        else {
+            ShowToaskDialogUtil.showTipDialog(this, "您还没有申请额度，是否现在申请？", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(new Intent(GoodsDetailActivity.this,WithDrawApplyActivity.class));
+                    finish();
+                }
+            });
+        }
     }
 }

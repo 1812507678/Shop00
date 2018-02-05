@@ -25,6 +25,7 @@ public class MyAppliaction extends Application {
         x.Ext.init(this);  //xUtil初始化
         Bmob.initialize(this, "34394e9af01578393b2bbf063e9faa37");   //Bmob初始化
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);   //友盟初始化
+        CrashReport.initCrashReport(getApplicationContext(), "d93e831bf3", false); //腾讯bugly初始化
 
         mContext = getApplicationContext();
     }
