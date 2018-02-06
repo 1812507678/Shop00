@@ -67,13 +67,14 @@ public class WithDrawApplyActivity extends BaseActivity implements View.OnClickL
         String password = et_commit_password.getText().toString();
 
 
-        if (money.equals("")){
+       /* if (money.equals("")){
             ToastUtil.showToask("请输入金额");
         }
         else if (mouth.equals("")){
             ToastUtil.showToask( "请输入月数");
-        }
-        else if (name.equals("")){
+        }*/
+
+        if (name.equals("")){
             ToastUtil.showToask("请输入姓名");
         }
         else if (phone.equals("")){

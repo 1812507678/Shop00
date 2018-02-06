@@ -3,6 +3,7 @@ package com.haijun.shop.application;
 import android.app.Application;
 import android.content.Context;
 
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 
 import org.xutils.x;

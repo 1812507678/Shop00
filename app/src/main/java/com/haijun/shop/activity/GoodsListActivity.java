@@ -43,7 +43,7 @@ public class GoodsListActivity extends BaseActivity {
     @Override
     protected void initData() {
         final ArrayList<Goods> goodsArrayList = new ArrayList<>();
-        final HorizontalListViewAdapter adapter = new HorizontalListViewAdapter(this, goodsArrayList);
+        final HorizontalListViewAdapter adapter = new HorizontalListViewAdapter(getApplicationContext(), goodsArrayList);
         mgv_goodslist_list.setAdapter(adapter);
 
         Intent intent = getIntent();

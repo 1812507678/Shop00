@@ -34,6 +34,8 @@ public class LoginActivity extends BaseActivity {
 
     protected void initView() {
         setCenterText("登录");
+        setLeftImage(R.drawable.back_normal);
+
         et_login_account = (EditText) findViewById(R.id.et_login_account);
         et_login_pwd = (EditText) findViewById(R.id.et_login_pwd);
     }

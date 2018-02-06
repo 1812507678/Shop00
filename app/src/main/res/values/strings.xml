@@ -6,7 +6,7 @@
     <dimen name="layout_margin_leftright">@dimen/x36</dimen>
 
     <string name="home_button_value1">首页</string>
-    <string name="home_button_value2">提现</string>
+    <string name="home_button_value2">申请</string>
     <string name="home_button_value3">购物车</string>
     <string name="home_button_value4">我的</string>
 
