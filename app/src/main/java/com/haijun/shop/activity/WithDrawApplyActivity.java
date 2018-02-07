@@ -83,10 +83,10 @@ public class WithDrawApplyActivity extends BaseActivity implements View.OnClickL
         else if (qq.equals("")){
             ToastUtil.showToask("请输入qq");
         }
-        else if (certificate.equals("")){
+        /*else if (certificate.equals("")){
             ToastUtil.showToask("请输入身份证号");
         }
-        /*else if (account.equals("")){
+        else if (account.equals("")){
             Toast.makeText(CommitMaterialStep2Activity.this, "请输入学信网账号", Toast.LENGTH_SHORT).show();
         }
         else if (password.equals("")){

@@ -23,6 +23,7 @@ import com.haijun.shop.adapter.HorizontalListViewAdapter;
 import com.haijun.shop.bean.Goods;
 import com.haijun.shop.bean.ProductCategory;
 import com.haijun.shop.util.LogUtil;
+import com.haijun.shop.util.ShopCartUtil;
 import com.haijun.shop.util.ToastUtil;
 
 import org.xutils.x;
@@ -120,7 +121,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         swipeRefreshLayout = (SwipeRefreshLayout) inflate.findViewById(R.id.sr1);
         swipeRefreshLayout.setColorSchemeResources(R.color.my_information_option_pressed,R.color.my_information_option_pressed);
         swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayoutListener());
-
         swipeRefreshLayout.setRefreshing(true);
 
 
@@ -314,6 +314,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
         });*/
         BmobQuery<Goods> bmobQuery = new BmobQuery<>();
+        //bmobQuery.addWhereEqualTo("isToHomePage",true);
+
         bmobQuery.findObjects(new FindListener<Goods>() {
             @Override
             public void done(List<Goods> list, BmobException e) {
@@ -326,10 +328,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 }
             }
         });
+
+
+
+
     }
 
 
     private void classifyGoods(List<Goods> list) {
+        dailyGoodsArrayList.clear();
+        phoneGoodsArrayList.clear();
+        computerGoodsArrayList.clear();
+        cameraGoodsArrayList.clear();
+        earphoneGoodsArrayList.clear();
+
         for (Goods goods:list){
             switch (goods.getCategoryType()){
                 case ProductCategory_Daily:

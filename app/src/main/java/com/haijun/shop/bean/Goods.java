@@ -22,6 +22,9 @@ public class Goods extends BmobObject implements Parcelable{
     private List<String> intrImageUrlList;
     private ProductCategory.ProductCategoryType categoryType;
 
+    private boolean isToHomePage;
+    private String intDetailrUrl;
+
     public Goods(String name, String logoUrl, String specification, float curPrice, float oldPrice, List<String> photoImageUrlList, List<String> introduceImageUrlList) {
         this.name = name;
         this.logoUrl = logoUrl;
@@ -135,6 +138,8 @@ public class Goods extends BmobObject implements Parcelable{
         parcel.writeList(intrImageUrlList);
         parcel.writeInt(categoryType.ordinal());
         parcel.writeString(getObjectId());
+        parcel.writeByte((byte) (isToHomePage ? 1 : 0));
+        parcel.writeString(intDetailrUrl);
     }
 
     public static final Creator<Goods> CREATOR = new Creator<Goods>() {
@@ -165,5 +170,24 @@ public class Goods extends BmobObject implements Parcelable{
         this.categoryType = ProductCategory.ProductCategoryType.values()[source.readInt()];
 
         this.setObjectId(source.readString());
+
+        this.isToHomePage = source.readByte() != 0;
+        this.intDetailrUrl = source.readString();
+    }
+
+    public boolean isToHomePage() {
+        return isToHomePage;
+    }
+
+    public void setToHomePage(boolean toHomePage) {
+        isToHomePage = toHomePage;
+    }
+
+    public String getIntDetailrUrl() {
+        return intDetailrUrl;
+    }
+
+    public void setIntDetailrUrl(String intDetailrUrl) {
+        this.intDetailrUrl = intDetailrUrl;
     }
 }

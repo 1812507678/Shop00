@@ -14,6 +14,7 @@ import cn.bmob.v3.BmobObject;
 
 public class ProductCategory extends BmobObject {
     private String name;
+    private String goodsId;
     private ProductCategoryType productCategoryType;
     private List<Goods> goodsList;
 

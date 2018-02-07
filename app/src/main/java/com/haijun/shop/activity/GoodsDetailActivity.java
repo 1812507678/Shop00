@@ -1,12 +1,18 @@
 package com.haijun.shop.activity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +22,7 @@ import com.haijun.shop.adapter.ImagesViewPageAdapter;
 import com.haijun.shop.bean.Goods;
 import com.haijun.shop.bean.ShopCart;
 import com.haijun.shop.bean.User;
+import com.haijun.shop.fragment.HomeFragment;
 import com.haijun.shop.util.ChooseAlertDialogUtil;
 import com.haijun.shop.util.Constant;
 import com.haijun.shop.util.DialogUtil;
@@ -25,6 +32,7 @@ import com.haijun.shop.util.ShopCartUtil;
 import com.haijun.shop.util.ShowToaskDialogUtil;
 import com.haijun.shop.util.ToastUtil;
 import com.haijun.shop.util.UserUtil;
+import com.haijun.shop.view.WebView4Scroll;
 
 import org.xutils.ImageManager;
 import org.xutils.x;
@@ -47,6 +55,8 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView tv_detail_curpirce;
     private TextView tv_detail_oldpirce;
     private Goods mGoods;
+    private WebView wv_detail_content;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_goods_detail);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void initView() {
         setCenterText("商品详情");
@@ -67,11 +78,47 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         ll_detail_introimages = findViewById(R.id.ll_detail_introimages);
         tv_detail_curpirce = findViewById(R.id.tv_detail_curpirce);
         tv_detail_oldpirce = findViewById(R.id.tv_detail_oldpirce);
+        wv_detail_content = findViewById(R.id.wv_detail_content);
 
         ll_detail_point = findViewById(R.id.ll_detail_point);
 
         tv_goodsdetail_buy.setOnClickListener(this);
         tv_goodsdetail_add.setOnClickListener(this);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sr1);
+        swipeRefreshLayout.setColorSchemeResources(R.color.my_information_option_pressed,R.color.my_information_option_pressed);
+        swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayoutListener());
+        swipeRefreshLayout.setRefreshing(true);
+
+
+
+
+
+        wv_detail_content.getSettings().setJavaScriptEnabled(true);
+
+        wv_detail_content.setWebViewClient(new WebViewClient() {
+            //覆盖shouldOverrideUrlLoading 方法
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+        wv_detail_content.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view,String url) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        // 设置子视图是否允许滚动到顶部
+        swipeRefreshLayout.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
+            @Override
+            public boolean canChildScrollUp(SwipeRefreshLayout parent, @Nullable View child) {
+                return wv_detail_content.getScrollY() > 0;
+            }
+        });
 
     }
 
@@ -84,7 +131,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         if (bundle!=null){
             mGoods = bundle.getParcelable("goods");
             if (mGoods !=null){
-                initSlidePointView(mGoods);
+                /*initSlidePointView(mGoods);
                 initDetailInroView(mGoods);
 
                 ImagesViewPageAdapter imagesViewPageAdapter = new ImagesViewPageAdapter(mGoods.getPhotoImageUrlList(),this);
@@ -94,7 +141,10 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
                 tv_detail_introduce.setText(mGoods.getSpecification());
                 tv_detail_curpirce.setText("¥"+ mGoods.getCurPrice());
                 tv_detail_oldpirce.setText("¥"+ mGoods.getOldPrice());
-                tv_detail_oldpirce.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
+                tv_detail_oldpirce.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线*/
+
+                wv_detail_content.loadUrl(mGoods.getIntDetailrUrl());
+
 
             }
         }
@@ -203,4 +253,13 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
             });
         }
     }
+
+    private class MySwipeRefreshLayoutListener implements SwipeRefreshLayout.OnRefreshListener{
+        @Override
+        public void onRefresh() {
+            Log.i(TAG,"onRefresh");
+            initData();
+        }
+    }
+
 }
