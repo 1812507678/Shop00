@@ -22,7 +22,7 @@ public class UserUtil {
         return user;
     }
 
-    public static User getUserFromSP(){
+    private static User getUserFromSP(){
         Gson gson = new Gson();
         String userString = SPUtil.getStringValueFromSP("user");
         if (!TextUtils.isEmpty(userString)){

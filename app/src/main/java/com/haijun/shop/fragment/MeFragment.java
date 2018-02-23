@@ -55,7 +55,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         return inflate;
     }
 
-
     private void initView() {
         RelativeLayout rl_user_center = inflate.findViewById(R.id.rl_user_center);
         LinearLayout ll_me_personinf = inflate.findViewById(R.id.ll_me_personinf);
@@ -68,7 +67,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         ll_me_personinf.setOnClickListener(this);
         ll_me_set.setOnClickListener(this);
     }
-
 
     private void initData() {
         User userInfo = UserUtil.getUserInfo();

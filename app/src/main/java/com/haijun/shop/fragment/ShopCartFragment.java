@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +16,10 @@ import android.widget.TextView;
 
 import com.haijun.shop.R;
 import com.haijun.shop.activity.GoodsDetailActivity;
-import com.haijun.shop.activity.GoodsListActivity;
 import com.haijun.shop.activity.WithDrawApplyActivity;
 import com.haijun.shop.adapter.ShopcartListAdapter;
 import com.haijun.shop.bean.Goods;
+import com.haijun.shop.bean.ShopCart;
 import com.haijun.shop.bean.User;
 import com.haijun.shop.util.Constant;
 import com.haijun.shop.util.LogUtil;
@@ -35,6 +37,7 @@ import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,6 +53,7 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
     private float allMoney;
     private List<Goods> mGoodsArrayList;
     private ShopcartListAdapter mShopcartListAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public ShopCartFragment() {
         // Required empty public constructor
@@ -78,7 +82,14 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
         tv_shopcart_money = inflate.findViewById(R.id.tv_shopcart_money);
         TextView tv_shopcart_pay = inflate.findViewById(R.id.tv_shopcart_pay);
 
+
         tv_shopcart_pay.setOnClickListener(this);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) inflate.findViewById(R.id.sr1);
+        swipeRefreshLayout.setColorSchemeResources(R.color.my_information_option_pressed,R.color.my_information_option_pressed);
+        swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayoutListener());
+        swipeRefreshLayout.setRefreshing(true);
+
 
     }
 
@@ -103,11 +114,11 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
 
         lv_shopcart_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int i, long l) {
                 ShowToaskDialogUtil.showTipDialog(getContext(), "确定要移除购物车吗", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ToastUtil.showToask("已移除");
+                    public void onClick(DialogInterface dialogInterface, int j) {
+                        removeGoodsFromShopCart(i);
                     }
                 });
                 return true;
@@ -137,21 +148,60 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
             new BmobQuery<Goods>().doSQLQuery(bql,new SQLQueryListener<Goods>(){
                 @Override
                 public void done(BmobQueryResult<Goods> result, BmobException e) {
+                    swipeRefreshLayout.setRefreshing(false);
                     if(e ==null){
                         LogUtil.i(TAG, "result:"+result.getResults());
                         if (result.getResults()!=null && result.getResults().size()>0){
                             LogUtil.i(TAG, "result:"+result.getResults().size());
+                            mGoodsArrayList.clear();
                             mGoodsArrayList.addAll(result.getResults());
                             mShopcartListAdapter.notifyDataSetChanged();
                             ShopCartUtil.getInstance().setGoodsShopCartList(result.getResults());
                         }
                     }else{
+                        ToastUtil.showToask("数据加载失败，请检查网络:"+e);
                         LogUtil.i(TAG, "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
                     }
                 }
             });
         }
+    }
 
+    private void removeGoodsFromShopCart(final int i) {
+        if (i<=mGoodsArrayList.size()){
+            Goods goods = mGoodsArrayList.get(i);
+
+            BmobQuery<ShopCart> bmobQuery = new BmobQuery();
+            bmobQuery.addWhereEqualTo("goodsId",goods.getObjectId());
+            bmobQuery.addWhereEqualTo("userId",UserUtil.getUserInfo().getObjectId());
+
+            bmobQuery.findObjects(new FindListener<ShopCart>() {
+                @Override
+                public void done(List<ShopCart> list, BmobException e) {
+                    if (e==null){
+                        if (list!=null && list.size()==1){
+                            ShopCart shopCart = list.get(0);
+                            shopCart.delete(new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+                                    if(e ==null){
+                                        mGoodsArrayList.remove(i);
+                                        ToastUtil.showToask("移除成功");
+                                        mShopcartListAdapter.notifyDataSetChanged();
+                                    }else{
+                                        ToastUtil.showToask("移除失败，请检查网络:"+e);
+                                        LogUtil.i(TAG, "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+                                    }
+                                }
+                            });
+                        }
+                    }
+                    else{
+                        ToastUtil.showToask("移除失败，请检查网络:"+e);
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -184,6 +234,14 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
             mGoodsArrayList.clear();
             mGoodsArrayList.addAll(goodsShopCartList);
             mShopcartListAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private class MySwipeRefreshLayoutListener implements SwipeRefreshLayout.OnRefreshListener{
+        @Override
+        public void onRefresh() {
+            Log.i(TAG,"onRefresh");
+            initData();
         }
     }
 }

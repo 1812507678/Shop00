@@ -82,7 +82,7 @@ public class SettingActivity extends BaseActivity {
 				case R.id.ll_me_exit:
 					startActivity(new Intent(SettingActivity.this,LoginActivity.class));
 					SPUtil.clearAllSPData();
-					UserUtil.putUserToSP(null);
+					UserUtil.user = null;
 					finish();
 					break;
 			}

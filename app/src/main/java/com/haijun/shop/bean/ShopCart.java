@@ -10,6 +10,9 @@ public class ShopCart extends BmobObject {
     private String userId;
     private String goodsId;
 
+    public ShopCart() {
+    }
+
     public ShopCart(String userId, String goodsId) {
         this.userId = userId;
         this.goodsId = goodsId;

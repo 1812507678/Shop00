@@ -22,8 +22,8 @@ import com.haijun.shop.activity.GoodsListActivity;
 import com.haijun.shop.adapter.HorizontalListViewAdapter;
 import com.haijun.shop.bean.Goods;
 import com.haijun.shop.bean.ProductCategory;
+import com.haijun.shop.util.CacheUtil;
 import com.haijun.shop.util.LogUtil;
-import com.haijun.shop.util.ShopCartUtil;
 import com.haijun.shop.util.ToastUtil;
 
 import org.xutils.x;
@@ -32,10 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -313,6 +311,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 }
             }
         });*/
+
+        //首页商品信息先从缓存中取数据，然后从网络上取
+        List<Goods> goodsFromCache = CacheUtil.getGoodsFromCache();
+        if (goodsFromCache!=null && goodsFromCache.size()>0){
+            classifyGoods(goodsFromCache);
+        }
+
         BmobQuery<Goods> bmobQuery = new BmobQuery<>();
         //bmobQuery.addWhereEqualTo("isToHomePage",true);
 
@@ -322,14 +327,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 swipeRefreshLayout.setRefreshing(false);
                 if (e==null){
                     classifyGoods(list);
+                    CacheUtil.putGoodsToCache(list);
                 }
                 else {
                     ToastUtil.showToask("数据加载失败，请检查网络:"+e);
                 }
             }
         });
-
-
 
 
     }
@@ -386,6 +390,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent);
             }
         });
+
 
     }
 

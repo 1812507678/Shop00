@@ -5,14 +5,19 @@
     tools:context="com.haijun.shop.fragment.ShopCartFragment"
     android:background="@color/app_background_color">
 
-    <ListView
-        android:id="@+id/lv_shopcart_list"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFF"
-        android:layout_marginBottom="@dimen/x131"
-        android:layout_marginTop="@dimen/x20">
-    </ListView>
+        android:layout_height="match_parent"
+        android:id="@+id/sr1"
+        android:layout_marginTop="@dimen/x20"
+        android:layout_marginBottom="@dimen/x131">
+        <ListView
+            android:id="@+id/lv_shopcart_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <RelativeLayout
         android:id="@+id/rl_detail_bootom"

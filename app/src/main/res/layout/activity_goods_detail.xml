@@ -113,7 +113,7 @@
         <RelativeLayout
             android:id="@+id/rl_detail_bootom"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x130"
+            android:layout_height="@dimen/x150"
             android:layout_alignParentBottom="true"
             android:background="#fff">
             <TextView

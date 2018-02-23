@@ -74,11 +74,12 @@ public class RegisterActivity extends BaseActivity {
     //将数据插入到数据库
     private void insertToDB(final User user) {
         DialogUtil.showDialog("正在注册....",this);
-        user.save(new SaveListener() {
+        user.save(new SaveListener<String>() {
             @Override
-            public void done(Object o, BmobException e) {
+            public void done(String objectId, BmobException e) {
                 DialogUtil.hideDialog(RegisterActivity.this);
                 if (e==null){
+                    user.setObjectId(objectId);
                     UserUtil.putUserToSP(user);
                     ToastUtil.showToask("注册成功");
                     startActivity(new Intent(RegisterActivity.this,MainActivity.class));

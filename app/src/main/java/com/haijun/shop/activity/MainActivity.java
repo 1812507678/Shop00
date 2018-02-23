@@ -7,15 +7,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.haijun.shop.R;
 import com.haijun.shop.fragment.HomeFragment;
 import com.haijun.shop.fragment.MeFragment;
-import com.haijun.shop.fragment.WithDrawFragment;
 import com.haijun.shop.fragment.ShopCartFragment;
+import com.haijun.shop.fragment.WithDrawFragment;
 import com.haijun.shop.util.ChooseAlertDialogUtil;
 import com.haijun.shop.util.LogUtil;
 
@@ -47,7 +46,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     //初始化页面
     @Override
     protected void initView() {
-        setRightImage(R.drawable.qrscan);
+        setRightImage(R.drawable.chat);
         getIv_base_rightimage().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -2,8 +2,13 @@ package com.haijun.shop.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.haijun.shop.application.MyAppliaction;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * @anthor haijun
@@ -100,4 +105,27 @@ public class SPUtil {
         mPreferences.edit().clear().apply();
     }
 
+    public static <T> void putListToSP(List<T> list,String key){
+        if (list!=null && list.size()>0){
+            Gson gson = new Gson();
+            String listString = gson.toJson(list);
+            SPUtil.putStringValueToSP(key,listString);
+        }
+    }
+
+    public static <T> List<T> getListFromSP(String key, Type type){
+        Gson gson = new Gson();
+        String listString = SPUtil.getStringValueFromSP(key);
+        if (!TextUtils.isEmpty(listString)){
+            return gson.fromJson(listString, type);
+        }
+        return null;
+    }
+
 }
+
+
+
+
+
+

@@ -56,11 +56,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥20000"
+                android:textStyle="bold"
+                android:textSize="15sp"
                 android:textColor="#000"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的额度"
+                android:textSize="12sp"
                 android:textColor="#8B8386"/>
         </LinearLayout>
         <ImageView
@@ -74,15 +77,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
+                android:textStyle="bold"
+                android:textSize="15sp"
                 android:textColor="#000"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我的积分"
+                android:text="我的金币"
+                android:textSize="12sp"
                 android:textColor="#8B8386"/>
         </LinearLayout>
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/ll_me_personinf"
