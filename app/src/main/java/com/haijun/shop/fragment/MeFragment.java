@@ -60,12 +60,21 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         LinearLayout ll_me_personinf = inflate.findViewById(R.id.ll_me_personinf);
         LinearLayout ll_me_set = inflate.findViewById(R.id.ll_me_set);
 
+        RelativeLayout rl_me_unpay = inflate.findViewById(R.id.rl_me_unpay);
+        RelativeLayout rl_me_unreceive = inflate.findViewById(R.id.rl_me_unreceive);
+        RelativeLayout rl_me_unevaluate = inflate.findViewById(R.id.rl_me_unevaluate);
+        RelativeLayout rl_me_saleafter = inflate.findViewById(R.id.rl_me_saleafter);
+
         cv_me_icon = inflate.findViewById(R.id.cv_me_icon);
         tv_me_nickname = inflate.findViewById(R.id.tv_me_nickname);
 
         rl_user_center.setOnClickListener(this);
         ll_me_personinf.setOnClickListener(this);
         ll_me_set.setOnClickListener(this);
+        rl_me_unpay.setOnClickListener(this);
+        rl_me_unreceive.setOnClickListener(this);
+        rl_me_unevaluate.setOnClickListener(this);
+        rl_me_saleafter.setOnClickListener(this);
     }
 
     private void initData() {
@@ -102,6 +111,26 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             case R.id.ll_me_set:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
+
+            case R.id.rl_me_unpay:
+                //待付款
+                
+                break;
+
+            case R.id.rl_me_unreceive:
+                //待收货
+
+                break;
+
+            case R.id.rl_me_unevaluate:
+                //待评价
+                break;
+
+            case R.id.rl_me_saleafter:
+                //售后
+
+                break;
+
         }
     }
 }

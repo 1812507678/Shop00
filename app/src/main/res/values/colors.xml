@@ -8,7 +8,7 @@
     <color name="list_divider_color">#DADADA</color>
     <color name="list_item_background_normal">#FFFFFF</color>
     <color name="teamlist_item_background_normal">#ffffff</color>
-    <color name="list_item_background_pressed">#efefef</color>
+    <color name="list_item_background_pressed">#DADADA</color>
 
     <color name="app_main_backcolor">#FFFFFF</color>
     <color name="app_dataevent_over">#969696</color>
