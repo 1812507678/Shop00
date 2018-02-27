@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.haijun.shop.R;
 import com.haijun.shop.activity.AccountnfoActivity;
 import com.haijun.shop.activity.LoginActivity;
+import com.haijun.shop.activity.MyOrderActivity;
 import com.haijun.shop.activity.SettingActivity;
 import com.haijun.shop.bean.User;
 import com.haijun.shop.util.LogUtil;
@@ -96,11 +97,11 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()){
             case R.id.rl_user_center:
             case R.id.ll_me_personinf:
-                User userInfo = UserUtil.getUserInfo();
-                if (userInfo!=null){
+                if (UserUtil.isLoginEd()){
                     startActivity(new Intent(getActivity(), AccountnfoActivity.class));
                 }
                 else {
@@ -114,21 +115,27 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
             case R.id.rl_me_unpay:
                 //待付款
-                
+                intent = new Intent(getActivity(), MyOrderActivity.class);
+                intent.putExtra("position",0);
+                startActivity(intent);
                 break;
 
             case R.id.rl_me_unreceive:
                 //待收货
-
+                intent = new Intent(getActivity(), MyOrderActivity.class);
+                intent.putExtra("position",1);
+                startActivity(intent);
                 break;
 
             case R.id.rl_me_unevaluate:
                 //待评价
+                intent = new Intent(getActivity(), MyOrderActivity.class);
+                intent.putExtra("position",2);
+                startActivity(intent);
                 break;
 
             case R.id.rl_me_saleafter:
                 //售后
-
                 break;
 
         }

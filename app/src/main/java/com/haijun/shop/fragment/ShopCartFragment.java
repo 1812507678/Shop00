@@ -86,7 +86,7 @@ public class ShopCartFragment extends Fragment implements View.OnClickListener{
         tv_shopcart_pay.setOnClickListener(this);
 
         swipeRefreshLayout = (SwipeRefreshLayout) inflate.findViewById(R.id.sr1);
-        swipeRefreshLayout.setColorSchemeResources(R.color.my_information_option_pressed,R.color.my_information_option_pressed);
+        swipeRefreshLayout.setColorSchemeResources(R.color.app_main_color,R.color.app_main_color);
         swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayoutListener());
         swipeRefreshLayout.setRefreshing(true);
 

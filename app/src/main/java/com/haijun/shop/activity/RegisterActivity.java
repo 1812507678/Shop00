@@ -80,7 +80,7 @@ public class RegisterActivity extends BaseActivity {
                 DialogUtil.hideDialog(RegisterActivity.this);
                 if (e==null){
                     user.setObjectId(objectId);
-                    UserUtil.putUserToSP(user);
+                    UserUtil.saveUserToLocal(user);
                     ToastUtil.showToask("注册成功");
                     startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                     finish();

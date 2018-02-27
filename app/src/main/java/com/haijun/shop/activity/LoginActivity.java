@@ -90,7 +90,7 @@ public class LoginActivity extends BaseActivity {
                             Toast.makeText(LoginActivity.this,"密码不正确",Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            UserUtil.putUserToSP(user);
+                            UserUtil.saveUserToLocal(user);
                             ToastUtil.showToask("登陆成功");
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             finish();

@@ -5,63 +5,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.haijun.shop.activity.MyOrderActivity">
-    <LinearLayout
-        android:id="@+id/ll_analysis_title"
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y128"
-        android:orientation="horizontal"
-        android:background="#212121"
-        android:layout_below="@id/rl_base_head">
-        <TextView
-            android:id="@+id/tv_order_unpay"
+        android:background="#FFF">
+
+        <!--第一个RadioButton-->
+        <RadioButton
+            android:id="@+id/rb_order_unpay"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="待付款"
-            android:textColor="@color/my_information_option_pressed"
+            android:button="@null"
+            android:background="@null"
+            android:textColor="@color/radiobutton_textbg"
             android:gravity="center"
-            android:textSize="@dimen/x48"/>
-        <TextView
-            android:id="@+id/tv_order_unreceive"
+            android:textSize="13sp"/>
+        <!--第二个RadioButton-->
+        <RadioButton
+            android:id="@+id/rb_order_unreceive"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="待收货"
-            android:textColor="#999999"
+            android:button="@null"
+            android:background="@null"
+            android:textColor="@color/radiobutton_textbg"
             android:gravity="center"
-            android:textSize="@dimen/x48"/>
-        <TextView
-            android:id="@+id/tv_order_unevaluate"
+            android:textSize="13sp"/>
+        <!--第三个RadioButton-->
+        <RadioButton
+            android:id="@+id/rb_order_unevaluate"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="待评价"
-            android:textColor="#999999"
+            android:button="@null"
+            android:background="@null"
+            android:textColor="@color/radiobutton_textbg"
             android:gravity="center"
-            android:textSize="@dimen/x48"/>
-        <TextView
-            android:id="@+id/tv_order_finish"
+            android:textSize="13sp"/>
+        <!--第四个RadioButton-->
+        <RadioButton
+            android:id="@+id/rb_order_finish"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="已完成"
-            android:textColor="#999999"
+            android:button="@null"
+            android:background="@null"
+            android:textColor="@color/radiobutton_textbg"
             android:gravity="center"
-            android:textSize="@dimen/x48"/>
-    </LinearLayout>
+            android:textSize="13sp"/>
+
+    </RadioGroup>
+
     <View
         android:id="@+id/v_analysis_select"
-        android:layout_width="@dimen/x360"
-        android:layout_height="@dimen/x6"
-        android:layout_below="@id/rl_base_head"
-        android:layout_marginTop="@dimen/y122"
-        android:background="@color/my_information_option_pressed"></View>
+        android:layout_width="@dimen/x270"
+        android:layout_height="@dimen/x3"
+        android:layout_below="@+id/radioGroup"
+        android:background="@color/app_main_color"></View>
 
-    <FrameLayout
-        android:id="@+id/fragment_content"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_analysis_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/ll_analysis_title"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/v_analysis_select"
         >
-    </FrameLayout>
+    </android.support.v4.view.ViewPager>
+
 </RelativeLayout>

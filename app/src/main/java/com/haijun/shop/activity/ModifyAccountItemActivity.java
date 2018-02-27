@@ -72,7 +72,7 @@ public class ModifyAccountItemActivity extends BaseActivity {
             public void done(BmobException e) {
                 if (e==null){
                     Toast.makeText(ModifyAccountItemActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
-                    UserUtil.putUserToSP(userInfo);
+                    UserUtil.saveUserToLocal(userInfo);
                     Intent intent = getIntent();
                     intent.putExtra("result",value);
                     setResult(RESULT_OK,intent);

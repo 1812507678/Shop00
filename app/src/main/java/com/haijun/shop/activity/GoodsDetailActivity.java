@@ -3,7 +3,6 @@ package com.haijun.shop.activity;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -18,21 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.haijun.shop.R;
-import com.haijun.shop.adapter.ImagesViewPageAdapter;
 import com.haijun.shop.bean.Goods;
 import com.haijun.shop.bean.ShopCart;
 import com.haijun.shop.bean.User;
-import com.haijun.shop.fragment.HomeFragment;
-import com.haijun.shop.util.ChooseAlertDialogUtil;
 import com.haijun.shop.util.Constant;
-import com.haijun.shop.util.DialogUtil;
 import com.haijun.shop.util.LogUtil;
 import com.haijun.shop.util.SPUtil;
 import com.haijun.shop.util.ShopCartUtil;
 import com.haijun.shop.util.ShowToaskDialogUtil;
 import com.haijun.shop.util.ToastUtil;
 import com.haijun.shop.util.UserUtil;
-import com.haijun.shop.view.WebView4Scroll;
 
 import org.xutils.ImageManager;
 import org.xutils.x;
@@ -86,7 +80,7 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         tv_goodsdetail_add.setOnClickListener(this);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sr1);
-        swipeRefreshLayout.setColorSchemeResources(R.color.my_information_option_pressed,R.color.my_information_option_pressed);
+        swipeRefreshLayout.setColorSchemeResources(R.color.app_main_color,R.color.app_main_color);
         swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayoutListener());
         swipeRefreshLayout.setRefreshing(true);
 

@@ -45,6 +45,7 @@ public class AccountnfoActivity extends BaseActivity {
 		setLeftImage(R.drawable.back_normal);
 
 		RelativeLayout rl_personcenter_persondata = (RelativeLayout) findViewById(R.id.rl_personcenter_persondata);
+		RelativeLayout rl_personcenter_address = (RelativeLayout) findViewById(R.id.rl_personcenter_address);
 		tv_personcenter_nickname = (TextView) findViewById(R.id.tv_personcenter_nickname);
 		iv_personcenter_iocn = (CircleImageView) findViewById(R.id.iv_personcenter_iocn);
 		TextView tv_personcenter_phone = (TextView) findViewById(R.id.tv_personcenter_phone);
@@ -54,6 +55,7 @@ public class AccountnfoActivity extends BaseActivity {
 		MyOnClicklListener myOnClicklListener =new MyOnClicklListener();
 		rl_personcenter_persondata.setOnClickListener(myOnClicklListener);
 		rl_personcenter_nickname.setOnClickListener(myOnClicklListener);
+		rl_personcenter_address.setOnClickListener(myOnClicklListener);
 
 		User userInfo = UserUtil.getUserInfo();
 		if (userInfo!=null){
@@ -92,6 +94,11 @@ public class AccountnfoActivity extends BaseActivity {
 					intent.putExtra("type",1);
 					startActivityForResult(intent,110);
 					break;
+
+				case R.id.rl_personcenter_address:
+					intent = new Intent(AccountnfoActivity.this, DeliveryAddressActivity.class);
+					startActivity(intent);
+					break;
 			}
 		}
 	}
@@ -101,6 +108,7 @@ public class AccountnfoActivity extends BaseActivity {
 		Log.i(TAG, "requestCode:" + requestCode);
 		if (resultCode==RESULT_OK){
 			String result = data.getStringExtra("result");
+
 			if (requestCode==110){
 				tv_personcenter_nickname.setText(result);
 				Intent intent = getIntent();
@@ -130,7 +138,7 @@ public class AccountnfoActivity extends BaseActivity {
 										public void done(BmobException e) {
 											if (e==null){
 												Toast.makeText(AccountnfoActivity.this,"头像上传成功",Toast.LENGTH_SHORT).show();
-												UserUtil.putUserToSP(user);
+												UserUtil.saveUserToLocal(user);
 											}else {
 												Toast.makeText(AccountnfoActivity.this,"头像上传失败"+e,Toast.LENGTH_SHORT).show();
 											}

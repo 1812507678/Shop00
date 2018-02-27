@@ -67,7 +67,7 @@ public class RetrievePasswordActivity extends BaseActivity {
                         User userInfo = list.get(0);
                         Log.i(TAG,"userInfo:"+userInfo.toString());
                         et_retrive_password.setText(userInfo.getPassword());
-                        UserUtil.putUserToSP(userInfo);
+                        UserUtil.saveUserToLocal(userInfo);
                         ToastUtil.showToask("密码已显示，请登陆");
                     }
                     else {

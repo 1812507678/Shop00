@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.haijun.shop.activity.DeliveryAddressActivity"
+    android:background="@color/app_background_color">
+
+    <ListView
+        android:id="@+id/lv_address_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/app_background_color"
+        android:dividerHeight="@dimen/x20">
+    </ListView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        android:text="添加新地址"
+        android:layout_alignParentBottom="true"
+        android:background="#FFF"
+        android:gravity="center"
+        android:onClick="addAddress"
+        android:textColor="@color/app_main_color"/>
+
+
+</RelativeLayout>

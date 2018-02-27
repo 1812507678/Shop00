@@ -31,9 +31,13 @@ public class UserUtil {
         return null;
     }
 
-    public static void putUserToSP(User user){
+    public static void saveUserToLocal(User user){
         Gson gson = new Gson();
         String userString = gson.toJson(user);
         SPUtil.putStringValueToSP("user",userString);
+    }
+
+    public static boolean isLoginEd(){
+        return getUserInfo() != null;
     }
 }

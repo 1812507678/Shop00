@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_main_backcolor">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x300"
+        android:layout_marginLeft="@dimen/layout_margin_leftright"
+        android:layout_marginRight="@dimen/layout_margin_leftright"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:textColor="#000"/>
+        <TextView
+            android:id="@+id/tv_item_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="165656565"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/tv_item_name"
+            android:layout_marginLeft="@dimen/x36"/>
+        <TextView
+            android:id="@+id/tv_item_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxxxx"
+            android:layout_below="@+id/tv_item_name"
+            android:layout_marginTop="@dimen/x5"
+            android:textSize="12sp"/>
+        <View
+            android:id="@+id/view_devi"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv_item_address"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@color/list_divider_color" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x65"
+            android:layout_below="@+id/view_devi"
+            android:layout_marginTop="@dimen/x30">
+            <LinearLayout
+                android:id="@+id/ll_item_setdefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <RadioButton
+                    android:id="@+id/rb_item_setdefault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"/>
+                <TextView
+                    android:id="@+id/tv_item_defalut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设为默认"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:textColor="#000"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_item_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/x60"
+                    android:src="@drawable/del_icon"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="删除"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:textColor="#000"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_item_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/ll_item_delete"
+                android:layout_marginRight="@dimen/x30">
+                <ImageView
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/x60"
+                    android:src="@drawable/edit_icon"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="编辑"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:textColor="#000"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
