@@ -8,6 +8,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="UnreceiveFragment" />
+        android:text="没有未收货订单" />
 
 </FrameLayout>

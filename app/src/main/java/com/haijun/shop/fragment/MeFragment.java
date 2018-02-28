@@ -1,6 +1,7 @@
 package com.haijun.shop.fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,7 @@ import org.xutils.x;
 public class MeFragment extends Fragment implements View.OnClickListener {
 
 
+    private static final String TAG = MeFragment.class.getSimpleName();
     private View inflate;
     private CircleImageView cv_me_icon;
     private TextView tv_me_nickname;
@@ -102,7 +104,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             case R.id.rl_user_center:
             case R.id.ll_me_personinf:
                 if (UserUtil.isLoginEd()){
-                    startActivity(new Intent(getActivity(), AccountnfoActivity.class));
+                    startActivityForResult(new Intent(getActivity(), AccountnfoActivity.class),120);
                 }
                 else {
                     startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -137,6 +139,24 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             case R.id.rl_me_saleafter:
                 //售后
                 break;
+
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        LogUtil.i(TAG,"requestCode:"+requestCode+"resultCode:"+resultCode+"");
+        if (resultCode== Activity.RESULT_OK && requestCode==120){
+            User userInfo = UserUtil.getUserInfo();
+            if (userInfo!=null){
+                if (!TextUtils.isEmpty(userInfo.getNickname())){
+                    tv_me_nickname.setText(userInfo.getNickname());
+                }
+                if (!TextUtils.isEmpty(userInfo.getIconUrl())){
+                    x.image().bind(cv_me_icon,userInfo.getIconUrl());
+                }
+            }
 
         }
     }

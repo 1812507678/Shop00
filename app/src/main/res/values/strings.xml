@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">任你花乐分期</string>
+   <!-- <string name="app_name">任你花乐分期</string>-->
+    <string name="app_name">拍来贷花租来</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -11,6 +12,12 @@
     <string name="home_button_value4">我的</string>
 
     <string name="yuan">¥</string>
+
+    <!--<string name="contanct_qq">2502928279</string>-->  <!--任你花分期贷-->
+    <string name="apk_platform">1</string>  <!--平台注释：0（人你还乐分期），1（拍来贷花租来）-->
+    <string name="contanct_qq">2992509620</string>  <!--拍来贷花租来-->
+    <string name="contanct_weixin">15966016931</string>
+    <string name="contanct_gongzhonghao">laohancoming</string>
 
     <dimen name="space_13">13.0dip</dimen>
     <dimen name="space_4">4.0dip</dimen>

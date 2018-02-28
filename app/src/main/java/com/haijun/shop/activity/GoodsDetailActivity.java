@@ -84,10 +84,6 @@ public class GoodsDetailActivity extends BaseActivity implements View.OnClickLis
         swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayoutListener());
         swipeRefreshLayout.setRefreshing(true);
 
-
-
-
-
         wv_detail_content.getSettings().setJavaScriptEnabled(true);
 
         wv_detail_content.setWebViewClient(new WebViewClient() {

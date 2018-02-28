@@ -111,9 +111,7 @@ public class AccountnfoActivity extends BaseActivity {
 
 			if (requestCode==110){
 				tv_personcenter_nickname.setText(result);
-				Intent intent = getIntent();
-				intent.putExtra("nickname",result);
-				setResult(RESULT_OK,intent);
+				setResult(RESULT_OK);
 			}
 
 			else if (requestCode==113){
@@ -139,6 +137,7 @@ public class AccountnfoActivity extends BaseActivity {
 											if (e==null){
 												Toast.makeText(AccountnfoActivity.this,"头像上传成功",Toast.LENGTH_SHORT).show();
 												UserUtil.saveUserToLocal(user);
+												setResult(RESULT_OK);
 											}else {
 												Toast.makeText(AccountnfoActivity.this,"头像上传失败"+e,Toast.LENGTH_SHORT).show();
 											}

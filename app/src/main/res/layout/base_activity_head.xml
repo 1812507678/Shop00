@@ -25,22 +25,30 @@
     <TextView
         android:id="@+id/tv_base_lefttext"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/y104"
+        android:paddingLeft="@dimen/x5"
+        android:paddingRight="@dimen/x5"
         android:text="left"
+        android:gravity="center"
         android:layout_marginLeft="@dimen/x36"
         android:textSize="@dimen/x48"
         android:textColor="#000"
         android:layout_centerVertical="true"
+        android:background="@drawable/bg_icon_press_oval"
         android:visibility="gone"/>
     <TextView
         android:id="@+id/tv_base_rightText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/y104"
+        android:paddingLeft="@dimen/x5"
+        android:paddingRight="@dimen/x5"
         android:text="right"
+        android:gravity="center"
         android:textSize="@dimen/x48"
         android:textColor="#000"
         android:layout_marginRight="@dimen/x36"
         android:layout_alignParentRight="true"
+        android:background="@drawable/bg_icon_press_oval"
         android:layout_centerVertical="true"
         android:visibility="gone"/>
     <ImageView

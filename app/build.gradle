@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.haijun.shop"
+        applicationId "com.haijun.shop.pailaidai"
         minSdkVersion 17
         targetSdkVersion 21
-        versionCode 101
-        versionName "1.0.1"
+        versionCode 103
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //multiDexEnabled true
@@ -46,7 +46,7 @@ android {
         xiaomi { dimension "default" }   //小米
         letv { dimension "default" }   //安卓市场
         huawei { dimension "default" }   //安卓市场
-        other { dimension "default" }   //其他
+        meizu { dimension "default" }   //其他
         inner { dimension "default" }   //其他
     }
 
@@ -78,4 +78,7 @@ dependencies {
     compile 'com.tencent.bugly:crashreport:latest.release'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
     implementation files('libs/alipaySdk-20170922.jar')
+
+    //省市区三级联动
+    compile 'liji.library.dev:citypickerview:0.7.0'
 }

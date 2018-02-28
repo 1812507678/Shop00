@@ -2,9 +2,13 @@ package com.haijun.shop.fragment;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -56,6 +61,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private ImageView iv_home_top;
     private ProgressBar pb_progress;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ViewPager vp_home_msg;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -120,8 +126,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         swipeRefreshLayout.setColorSchemeResources(R.color.app_main_color,R.color.app_main_color);
         swipeRefreshLayout.setOnRefreshListener(new MySwipeRefreshLayoutListener());
         swipeRefreshLayout.setRefreshing(true);
-
-
 
 
 
@@ -260,6 +264,111 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         public void onRefresh() {
             Log.i(TAG,"onRefresh");
             initData();
+        }
+    }
+
+    int previousSelectedPosition = 0;
+    private void initViewPage() {
+        vp_home_msg = (ViewPager) inflate.findViewById(R.id.vp_home_msg);
+
+        final LinearLayout ll_home_point = (LinearLayout) inflate.findViewById(R.id.ll_home_point);
+
+        for (int i = 0; i < 4; i++){
+            View pointView = new View(getActivity());
+            pointView.setBackgroundResource(R.drawable.selector_bg_point);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(30, 30);
+            if(i != 0)
+                layoutParams.leftMargin = 10;
+            pointView.setEnabled(false);
+            ll_home_point.addView(pointView, layoutParams);
+        }
+
+        vp_home_msg.setAdapter(new MyViewPageAdapter());
+
+        vp_home_msg.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                int newPosition = position % 4;
+                ll_home_point.getChildAt(previousSelectedPosition).setEnabled(false);
+                ll_home_point.getChildAt(newPosition).setEnabled(true);
+                previousSelectedPosition  = newPosition;
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                vp_home_msg.setCurrentItem(vp_home_msg.getCurrentItem() + 1);
+                            }
+                        });
+                    }
+                }
+            }
+        }.start();
+    }
+
+    class MyViewPageAdapter extends PagerAdapter {
+        private BitmapFactory.Options options ;
+
+        public MyViewPageAdapter() {
+            options = new BitmapFactory.Options();
+            //options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+            //options.inSampleSize = 2;
+        }
+
+        @Override
+        public int getCount() {
+            return Integer.MAX_VALUE;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view==object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            int newPosition = position % 4;
+            //
+            // Log.i(TAG,"instantiateItem newPosition:"+newPosition);
+            ImageView imageView = new ImageView(getContext());
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+            if (newPosition<dailyGoodsArrayList.size()){
+                Goods goods = dailyGoodsArrayList.get(newPosition);
+                x.image().bind(imageView,goods.getLogoUrl());
+            }
+
+            container.addView(imageView);
+            return imageView;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
         }
     }
 }

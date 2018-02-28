@@ -11,15 +11,21 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.haijun.shop.R;
+import com.haijun.shop.bean.Apk;
 import com.haijun.shop.fragment.HomeFragment;
 import com.haijun.shop.fragment.MeFragment;
 import com.haijun.shop.fragment.ShopCartFragment;
 import com.haijun.shop.fragment.WithDrawFragment;
+import com.haijun.shop.util.ApkUtil;
 import com.haijun.shop.util.ChooseAlertDialogUtil;
 import com.haijun.shop.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
@@ -82,6 +88,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     protected void initData() {
+        ApkUtil.checkUpdate(this);
 
     }
 

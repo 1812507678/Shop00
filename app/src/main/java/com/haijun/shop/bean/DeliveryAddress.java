@@ -54,4 +54,14 @@ public class DeliveryAddress extends BmobObject {
     public void setDefault(boolean aDefault) {
         isDefault = aDefault;
     }
+
+    @Override
+    public String toString() {
+        return "DeliveryAddress{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", isDefault=" + isDefault +
+                '}';
+    }
 }

@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     tools:context="com.haijun.shop.fragment.HomeFragment"
     android:id="@+id/sr1"
-    android:background="@color/app_background_color">
+    android:background="@color/app_background_color"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,11 +23,42 @@
                 android:src="@drawable/ic_launcher_background"
                 android:scaleType="centerCrop"/>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#999999"
+                android:visibility="gone">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_home_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp">
+                </android.support.v4.view.ViewPager>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:padding="5dp">
+                    <!--android:background="#55888888"-->
+                    <LinearLayout
+                        android:id="@+id/ll_home_point"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x200"
                 android:orientation="horizontal"
-                android:background="#FFF">
+                android:background="#FFF"
+                android:visibility="gone">
                 <RelativeLayout
                     android:id="@+id/rl_me_unpay"
                     android:layout_width="0dp"

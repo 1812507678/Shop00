@@ -1,10 +1,8 @@
 package com.haijun.shop.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.haijun.shop.R;
-import com.haijun.shop.bean.ApplyInfo;
+import com.haijun.shop.bean.ApplyInfo_pailaidai;
 import com.haijun.shop.util.Constant;
 import com.haijun.shop.util.DialogUtil;
 import com.haijun.shop.util.LogUtil;
@@ -124,7 +122,7 @@ public class WithDrawFragment extends Fragment implements View.OnClickListener{
         else {
             //数据提交
 
-            ApplyInfo applyInfo = new ApplyInfo();
+            ApplyInfo_pailaidai applyInfo = new ApplyInfo_pailaidai();
             applyInfo.setName(name);
             applyInfo.setMoney(money);
             applyInfo.setMouth(mouth);
@@ -138,7 +136,7 @@ public class WithDrawFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    private void uploadData(ApplyInfo applyInfo) {
+    private void uploadData(ApplyInfo_pailaidai applyInfo) {
         DialogUtil.showDialog("正在提交",getActivity());
         applyInfo.save(new SaveListener<String>() {
             @Override

@@ -16,6 +16,7 @@ public class Apk extends BmobObject {
     private String qrCode;
     private String contactPhone;
     private String platform;
+    private String updateDescription ;
     private boolean isuploadApkTest;
 
     public String getApkUrl() {
@@ -105,6 +106,14 @@ public class Apk extends BmobObject {
 
     public void setIsuploadApkTest(boolean isuploadApkTest) {
         this.isuploadApkTest = isuploadApkTest;
+    }
+
+    public String getUpdateDescription() {
+        return updateDescription;
+    }
+
+    public void setUpdateDescription(String updateDescription) {
+        this.updateDescription = updateDescription;
     }
 
     @Override

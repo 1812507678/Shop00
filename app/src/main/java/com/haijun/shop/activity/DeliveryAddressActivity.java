@@ -1,5 +1,6 @@
 package com.haijun.shop.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -83,8 +84,14 @@ public class DeliveryAddressActivity extends BaseActivity{
 
 
     public void addAddress(View view) {
-
+        startActivityForResult(new Intent(this,AddAddressActivity.class),100);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100 && resultCode==RESULT_OK){
 
+        }
+    }
 }

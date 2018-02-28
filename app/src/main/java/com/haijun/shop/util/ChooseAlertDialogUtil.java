@@ -1,13 +1,10 @@
 package com.haijun.shop.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -46,18 +43,28 @@ public class ChooseAlertDialogUtil {
         TextView bt_choose_copygongzhonghao = inflate.findViewById(R.id.bt_choose_copygongzhonghao);
 
 
-        final Apk apkFromSP = ApkUtil.getApkFromSP();
-        if (apkFromSP!=null){
-            if (!TextUtils.isEmpty(apkFromSP.getQqContactInfo())){
-                 tv_dialog_qq.setText("qq号："+apkFromSP.getQqContactInfo());
-            }
-            if (!TextUtils.isEmpty(apkFromSP.getWeixinContactInfo())){
-                tv_dialog_weixin.setText("微信号："+apkFromSP.getWeixinContactInfo());
-            }
-            if (!TextUtils.isEmpty(apkFromSP.getWeixinGZHContactInfo())){
-                tv_dialog_gongzhonghao.setText("公众号："+apkFromSP.getWeixinGZHContactInfo());
-            }
+        Apk apkFromSP = ApkUtil.getApkFromSP();
+        String qq = context.getResources().getString(R.string.contanct_qq);
+        String weixin = context.getResources().getString(R.string.contanct_weixin);
+        String gongzhonghao = context.getResources().getString(R.string.contanct_gongzhonghao);
+
+        if (apkFromSP==null){
+            apkFromSP = new Apk();
+            apkFromSP.setQqContactInfo(qq);
+            apkFromSP.setWeixinContactInfo(weixin);
+            apkFromSP.setWeixinGZHContactInfo(gongzhonghao);
         }
+
+        if (!TextUtils.isEmpty(apkFromSP.getQqContactInfo())){
+             tv_dialog_qq.setText("qq号："+apkFromSP.getQqContactInfo());
+        }
+        if (!TextUtils.isEmpty(apkFromSP.getWeixinContactInfo())){
+            tv_dialog_weixin.setText("微信号："+apkFromSP.getWeixinContactInfo());
+        }
+        if (!TextUtils.isEmpty(apkFromSP.getWeixinGZHContactInfo())){
+            tv_dialog_gongzhonghao.setText("公众号："+apkFromSP.getWeixinGZHContactInfo());
+        }
+
 
         final AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.myCorDialog).setView(inflate).create();
         alertDialog.setCanceledOnTouchOutside(false);
